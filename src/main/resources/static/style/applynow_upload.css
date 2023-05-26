@@ -1,0 +1,202 @@
+* {
+    font-family: Noto Sans KR;
+    margin: 0;
+    padding: 0;
+}
+
+
+main {
+    width: 1300px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5%;
+    align-items: flex-start;
+}
+
+.sideBar {
+    float: left;
+    width: 26.33%;
+    height: auto;
+}
+
+.sideBar ul {
+    float: right;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menuPart {
+    float: right;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.sideBar li.active a {
+    color: #256BF4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sideBar li a {
+    color: black;
+    text-decoration: none;
+    font-weight: thin;
+}
+
+.sideBar li a:hover {
+    color: #256BF4;
+}
+
+/* 마우스 올리는*/
+
+.right_info {
+    color: rgba(29.000000171363354, 29.000000171363354, 32.00000189244747, 1);
+    position: relative;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.main {
+    float: left;
+    width: 55%;
+    height: auto;
+    padding: 50px;
+            border-left: 1px solid #B7B7B7;
+
+}
+
+/* 회원탈퇴 */
+
+.hr1 {
+    background: #256BF4;
+    height: 3px;
+    border: 0;
+    border-radius: 10px;
+}
+
+.root{
+  display: flex;
+  margin: 15px 0px 10px 0px;
+}
+
+.btn {
+    background-color: #256BF4;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 98px;
+    float: right;
+    margin-bottom: 20px;
+}
+
+.btn:hover {
+    background-color: #0069d9;
+}
+
+iframe{
+    margin-bottom:10px;
+}
+
+textarea{
+  padding-top: 5px;
+  margin-top: 10px;
+  font-size: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #ffffff;
+  border :5px solid rgb(233, 233, 233);
+  border-radius: 10px 0px 10px 0px;
+  resize:none;
+    height: auto;
+    overflow: hidden;
+  width: 90%;
+  font-size: 17px;
+}
+
+.box1 label{
+    font-size: 17px;
+    color: #256BF4;
+    font-weight: bold;
+    margin-top:4px;
+}
+
+main p{
+    font-size: 17px;
+    margin-top:2px;
+    font-weight: bold;
+}
+
+.main span{
+    font-size: 17px;
+    margin-top:2px;
+    font-weight: bold;
+}
+
+form textarea{
+    padding-top: 5px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(233, 233, 233);
+    resize:none;
+    width: 660px;
+    height: auto;
+        overflow: hidden;
+    float: left;
+    box-sizing: border-box;
+}
+
+main input {
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233)
+}
+
+.labelname {
+    width: 70px;
+}
+
+.box2 {
+    margin-left: 30px;
+    display: inline-block;
+}
+
+.box2 label{
+  font-size: 17px;
+  color: #256BF4;
+  font-weight: bold;
+}
+
+.box1 label{
+  font-size: 17px;
+  color: #256BF4;
+  font-weight: bold;
+  margin-top:4px;
+}
+
+.box3 label{
+  font-size: 17px;
+  color: #256BF4;
+  font-weight: bold;
+  margin-top:4px;
+}
+
+.editlink {
+    font-size: 17px;
+      color: #256BF4;
+      font-weight: bold;
+      margin-top:4px;
+      display: inline-block;
+}

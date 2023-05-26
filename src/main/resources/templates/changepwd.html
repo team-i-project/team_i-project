@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>비밀번호 변경</title>
+  <link rel="stylesheet" th:href="@{/style/changepwd.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <script>
+    function validatePassword() {
+
+      var renewpwd = document.getElementById("renewpwd").value;
+      var newpwd = document.getElementById("newpwd").value;
+
+      if(newpwd.length < 4) {
+        alert("비밀번호 4자 이상 입력하세요.")
+        return false;
+      }
+      else if (newpwd != renewpwd) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return false;
+      }
+
+    }
+  </script>
+  <script th:inline="javascript">
+    var failMsg = [[${failMsg}]];
+    if (failMsg != null) {
+      alert(failMsg);
+    }
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+<body>
+<main>
+  <div class="changepwd">
+    <form id="changepwd" name="changepwd" method="POST" th:action="@{/changepwd}">
+      <h1 class="changepwdText">비밀번호 변경</h1>
+      <div class=currentPart>
+        <div class=currentArea>
+          <span class="currentText">현재 비밀번호</span>
+          <div class=currentInput>
+            <input type="password" placeholder="••••••••" id="current"
+                   name="current"
+                   style="border: none; background: transparent;">
+          </div>
+        </div>
+      </div>
+
+      <div class=newPart>
+        <div class=newArea>
+          <span class="newText">새 비밀번호</span>
+          <span class="newInput">
+                            <input type="password" placeholder="••••••••" id="newpwd"
+                                   name="newpwd"
+                                   style="border: none; background: transparent;"></span>
+        </div>
+      </div>
+
+      <div class=renewPart>
+        <div class=renewArea>
+          <span class="renewText">새 비밀번호 확인</span>
+          <span class="renewInput"><input type="password" placeholder="••••••••" id="renewpwd"
+                                          style="border: none; background: transparent;"></span>
+        </div>
+      </div>
+      <button type="submit" class=loginButton onclick="return validatePassword()">변경하기</button>
+    </form>
+  </div>
+</main>
+</body>
+</th:block>
+</html>

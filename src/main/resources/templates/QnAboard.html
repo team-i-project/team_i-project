@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/style/Q&Aboard.css}">
+        <title>고객센터: Q&A</title>
+    </head>
+    <th:block layout:fragment="content">
+
+    <body>
+    <main>
+        <div class="board_list_wrap">
+            <h1><a class="nonActive" th:href="@{/Qna_question}">자주 묻는 질문</a> | <a class="active1" th:href="@{/QnAboard}"><b>Q&A</b></a></h1><br />
+            <form id="QnAboard" method="POST" th:action="@{/QnAboard}" >
+                <div class="paging1">
+                    <div class="root">
+                        <textarea class="input1" type="text" placeholder="문의 내용을 적어주세요" name = "question"  required></textarea>
+
+                        <input class="btn" type="submit" id="qabtn" value="작성" >
+                    </div>
+                </div>
+             </form>
+            <br />
+
+    <table class="board_list" id="contents">
+        <thead>
+        <tr>
+            <th style="height: 25px; width : 100px; table-layout:fixed;">답변 여부</th>
+            <th style="height: 25px; width : 575px; table-layout:fixed;  word-wrap: break-word;">질문/답변</th>
+            <th style="height: 25px; width : 125px; table-layout:fixed;">닉네임</th>
+            <th style="height: 25px; width : 100px; table-layout:fixed;">작성일</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        <tr th:each="qnado, status:${qnado}">
+            <td th:text="${qnado.answer == '아직 답변되지 않은 질문입니다.'? '미답변' : '답변 완료'}" th:class="${qnado.answer == '아직 답변되지 않은 질문입니다.'} ? 'nonanswered' : 'answered'"></td>
+            <td>
+                <div class="panel-faq-container">
+                <p class="panel-faq-title" th:text="${qnado.question}"></p>
+                <div class="panel-faq-answer">
+                    <th:block th:if="${session.type != '관리자' || (qnado.answer != '아직 답변되지 않은 질문입니다.' && session.type == '관리자')}">
+                    <br />
+                    <hr />
+                    <br />
+                    <p th:text="${qnado.answer}"> </p>
+                    </th:block>
+                    <th:block th:if="${qnado.answer == '아직 답변되지 않은 질문입니다.' && session.type == '관리자'}">
+                            <form method="POST" th:action="@{/QnAboard/answer}">
+                                <input type="hidden" name="qnano" th:value="${qnado.qnano}" />
+                                <textarea class="input2" type="text" placeholder="문의 답변 내용을 적어주세요" name = "answer"  required></textarea>
+                                <input class="btn2" type="submit" id="answerbtn" value="작성" >
+                            </form>
+                    </th:block>
+                </div>
+            </div>
+            </td>
+            <td th:text="${qnado.nickname}"></td>
+            <td th:text="${qnado.postdate}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <script th:inline="javascript">
+        window.onload = () => {
+  // panel-faq-container
+  const panelFaqContainer = document.querySelectorAll(".panel-faq-title"); // NodeList 객체
+
+  // panel-faq-answer
+  let panelFaqAnswer = document.querySelectorAll(".panel-faq-answer");
+
+  // btn-all-close
+  const btnAllClose = document.querySelector("#btn-all-close");
+
+  // 반복문 순회하면서 해당 FAQ제목 클릭시 콜백 처리
+  for( let i=0; i < panelFaqContainer.length; i++ ) {
+    panelFaqContainer[i].addEventListener('click', function() { // 클릭시 처리할 일
+      // FAQ 제목 클릭시 -> 본문이 보이게끔 -> active 클래스 추가
+      panelFaqAnswer[i].classList.toggle('active');
+    });
+  };
+
+  btnAllClose.addEventListener('click', function() {
+    // 버튼 클릭시 처리할 일
+    for(let i=0; i < panelFaqAnswer.length; i++) {
+        panelFaqAnswer[i].classList.remove('active');
+    };
+  });
+}
+    </script>
+            <div class="paging">
+                <th:block th:if="${totalPages > 0}">
+                    <a th:href="@{/QnAboard(page=1)}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><<</a>
+                    <a th:href="@{/QnAboard(page=${currentPage != 1 ? currentPage - 1 : currentPage})}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><</a>
+
+                    <th:block th:each="pageNumber : ${#numbers.sequence(startPage, endPage)}">
+                        <a th:href="@{/QnAboard(page=${pageNumber})}" th:class="${pageNumber==currentPage}?'num on':'num'">
+                            [[${pageNumber}]]
+                        </a>
+                    </th:block>
+
+                    <a th:href="@{/QnAboard(page=${currentPage != totalPages ? currentPage + 1 : currentPage})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">></a>
+                    <a th:href="@{/QnAboard(page=${totalPages})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">>></a>
+                </th:block>
+            </div>
+        </div>
+    </main>
+    </body>
+
+    </th:block>
+</html>

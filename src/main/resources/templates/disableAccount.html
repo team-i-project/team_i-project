@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>마이 페이지: 회원탈퇴</title>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/style/disableAccount.css}">
+  <script th:inline="javascript">
+    var errorMsg = [[${errorMsg}]];
+
+    if(errorMsg != null){
+      alert(errorMsg);
+    }
+
+    function check(e) {
+
+      var cur = document.getElementById("current").value;
+      var recur = document.getElementById("recurrent").value;
+
+      if (cur != recur) {
+        alert("비밀번호와 비밀번호 재입력이 일치하지 않습니다.");
+        e.preventDefault();
+        return false;
+      }
+    }
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+<body>
+
+  <main>
+    <nav class="sideBar">
+      <ul>
+        <div class=menuPart>
+          <h2>마이 페이지</h2>
+          <li><a th:href="@{/myPage}">내 기본정보</a></li>
+
+          <li><a th:href="@{/my_recruit}" th:if="${session.type}=='유튜버'">작성한 구인글</a></li>
+
+          <li><a th:href="@{/applynow}" th:if="${session.type}=='편집자'">지원현황 확인</a></li>
+          <li><a th:href="@{/myPage/portfolio_result}" th:if="${session.type}=='편집자'">내 포트폴리오 보기</a></li>
+          <li class="active"><a th:href="@{/disableAccount}" class="disable">회원탈퇴 </a></li>
+        </div>
+
+      </ul>
+    </nav>
+
+    <div class="main">
+      <h3 class="right_info">회원탈퇴</h3>
+
+      <form th:action = "@{/disableAccount}" method = "post">
+      <div class="container">
+        <div class="textbox">
+          <h4>회원탈퇴 신청에 앞서 아래의 사항을 반드시 확인 하세요.</h4><br/>
+          <p>회원탈퇴를 신청하시면 해당 아이디는 즉시 탈퇴 처리됩니다.</p>
+          <p>회원 정보 및 게시물 등의 모든 이용 내역이 삭제됩니다.</p>
+          <p>회원탈퇴 후에는 동일 아이디로 다시 가입하실 수 있으나</p>
+          <p>탈퇴 이전의 정보는 저장되지 않습니다.</p><br />
+          <p>위 사항에 동의하십니까?</p>
+        </div>
+
+
+        <div class="checkbox">
+          <input type="checkbox" id="agree" name="agree" required>
+          <label for="agree">동의합니다</label>
+        </div>
+      </div>
+
+      <div class="passwdcheck">
+        <div class=currentPart>
+          <div class=currentArea>
+            <span class="currentText">비밀번호</span>
+            <div class=currentInput>
+              <input type="password" placeholder="••••••••" id="current" style="border: none; background: transparent;" name = "password" required>
+            </div>
+          </div>
+        </div>
+
+        <div class=recurrentPart>
+          <div class=recurrentArea>
+            <span class="recurrentText">비밀번호 재입력</span>
+            <div class=recurrentInput>
+              <input type="password" placeholder="••••••••" id="recurrent" name = "confirm_password"
+                style="border: none; background: transparent;" required>
+            </div>
+          </div>
+        </div>
+          <button type="submit" class="disableAccount" th:onclick="check(event)">탈퇴하기</button>
+        </div>
+    </form>
+    </div>
+
+  </main>
+</body>
+</th:block>
+</html>

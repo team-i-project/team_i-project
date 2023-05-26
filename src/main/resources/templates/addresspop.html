@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>주소 찾기</title>
+
+
+</head>
+
+<script>
+  function init(){
+      console.log("작동확인")
+
+      document.form.confmKey.value = "U01TX0FVVEgyMDIzMDUwMjE0MTI1MDExMzczNzM=";
+      document.form.returnUrl.value = "http://localhost:3030/road-return" //location.href;
+      document.form.resultType.value = "4";
+      document.form.action="https://business.juso.go.kr/addrlink/addrLinkUrl.do";
+      document.form.submit();
+
+  }
+
+</script>
+
+<body onload="init();">
+<form id="form" name="form" method="post">
+    <input type="hidden" id="confmKey" name="confmKey" value=""/>
+    <input type="hidden" id="returnUrl" name="returnUrl" value=""/>
+    <input type="hidden" id="resultType" name="resultType" value=""/>
+</form>
+</body>
+</html>

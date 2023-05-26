@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>마이페이지: 지원현황 확인</title>
+  <link rel="stylesheet" th:href="@{/style/applynow.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <script th:inline="javascript">
+    var Msg = [[${param.msg}]];
+    if (Msg != null){
+      alert(Msg);
+    }
+
+    function check(){
+      if (!confirm("정말 지원 취소하시겠습니까?")) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+  <body>
+
+  <main>
+    <nav class="sideBar">
+      <ul>
+        <div class=menuPart>
+          <h2>마이 페이지</h2>
+          <li><a th:href="@{/myPage}">내 기본정보</a></li>
+
+          <li><a th:href="@{/my_recruit}" th:if="${session.type}=='유튜버'">작성한 구인글</a></li>
+
+          <li class="active"><a th:href="@{/applynow}" th:if="${session.type}=='편집자'">지원현황 확인</a></li>
+          <li><a th:href="@{/myPage/portfolio_result}" th:if="${session.type}=='편집자'">내 포트폴리오 보기</a></li>
+          <li><a th:href="@{/disableAccount}" class="disable">회원탈퇴 </a></li>
+        </div>
+
+      </ul>
+    </nav>
+
+    <div class="main">
+      <h3 class="right_info">지원현황 확인</h3>
+      <hr>
+      <div id="board">
+        <div class="post">
+          <table class="board_list">
+            <thead>
+            <tr>
+              <th>구인글 번호</th>
+              <th>마감일</th>
+              <th>제목</th>
+              <th>영상 제출 버튼</th>
+              <th>지원 취소 버튼</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${notRecruit}"><td rowspan="1"></td><td colspan="3">[[${notRecruit}]]</td><td colspan="1"></td></tr>
+            <tr th:each="recruitDO : ${recruitDO}">
+              <td style="width : 72px; table-layout:fixed;" >[[${recruitDO.recruitNo}]]</td>
+              <td style="width : 72px; table-layout:fixed;" >[[${recruitDO.deadline}]]</td>
+              <td style="width : 320px; table-layout:fixed; word-break:break-all"><a th:href="@{/recruit_result(recruitNo= ${recruitDO.recruitNo})}">[[${recruitDO.title}]] </a></td>
+              <td style="width : 120px; table-layout:fixed;">
+                <a th:if ="${recruitDO.overdate} == true" th:href="@{/applynow_upload(recruitNo= ${recruitDO.recruitNo})}" class="btn_edit">편집영상제출</a>
+                <a th:if ="${recruitDO.overdate} == false" class="btn_edit">마감입니다</a>
+              </td >
+              <td style="width : 100px; table-layout:fixed;">
+                <a th:if ="${recruitDO.overdate} == true" th:href="@{/applydelete(recruitNo= ${recruitDO.recruitNo})}" class="btn_cancel" onclick="return check()">지원취소</a>
+                <a th:if ="${recruitDO.overdate} == false" class="btn_cancel">취소불가</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="paging">
+          <th:block th:if="${totalPages > 0}">
+            <a th:href="@{/applynow(page=1)}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><<</a>
+            <a th:href="@{/applynow(page=${currentPage != 1 ? currentPage - 1 : currentPage})}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><</a>
+
+            <th:block th:each="pageNumber : ${#numbers.sequence(startPage, endPage)}">
+              <a th:href="@{/applynow(page=${pageNumber})}" th:class="${pageNumber==currentPage}?'num on':'num'">
+                [[${pageNumber}]]
+              </a>
+            </th:block>
+
+            <a th:href="@{/applynow(page=${currentPage != totalPages ? currentPage + 1 : currentPage})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">></a>
+            <a th:href="@{/applynow(page=${totalPages})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">>></a>
+          </th:block>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  </body>
+</th:block>
+</html>

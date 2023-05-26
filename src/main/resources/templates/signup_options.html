@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+  <link rel="stylesheet" th:href="@{/style/signup_options.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="content">
+<body>
+  <div class="button-container">
+    <a th:href="@{/signup_youtuber}" class="button">
+      <img class="button-icon" th:src="@{/img/youtuber-icon.png}" alt="YouTuber Icon">
+      유튜버 회원가입
+    </a>
+    <a th:href="@{/signup_editor}" class="button">
+      <img class="button-icon" th:src="@{/img/editor-icon.png}" alt="Editor Icon">
+      편집자 회원가입
+    </a>
+  </div>
+
+</body>
+</th:block>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/style/portfolio_board.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <title>포트폴리오 게시판</title>
+</head>
+<th:block layout:fragment="content">
+  <body>
+
+  <main>
+    <div class="board_list_wrap">
+      <form th:action = "@{/portfolio_board/search}" method="POST">
+        <h1><input class="search" id="folio_search_text" name="folio_search_text" placeholder="검색어를 입력하세요"></h1>
+        <button class="btn" type="submit">검색</button>
+        <hr />
+        <div>· 근무 가능 지역 : <input class="search2" id="location" name="location" placeholder="근무 가능 지역을 검색하세요"></div>
+        <div class="filters">
+          <p>· 편집 툴 : </p>
+          <label><input type="checkbox" name="edit_tools_folio" value = "프리미어프로"> 프리미어 프로</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "애프터이펙트"> 애프터 이펙트</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "베가스"> 베가스</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "파이널컷"> 파이널 컷</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "파워디렉터"> 파워 디렉터</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "포토샵"> 포토샵</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "일러스트레이터"> 일러스트레이터</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "마야"> MaYa</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "블렌더"> Blender</label>
+          <label><input type="checkbox" name="edit_tools_folio" value = "기타"> 기타</label>
+        </div>
+      </form>
+      <hr />
+      <table class="board_list">
+
+        <caption>게시판 목록</caption>
+        <thead>
+        <tr>
+          <th style="height: 25px; width : 320px; table-layout:fixed;">제목</th>
+          <th style="height: 25px; width : 120px; table-layout:fixed;">닉네임</th>
+          <th style="height: 25px; width : 100px; table-layout:fixed;">공개 날짜</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="portfolioDO : ${portfolioDO}">
+
+          <td style="height: 25px; width : 320px; table-layout:fixed; word-break:break-all"><a th:href="@{/portfolio_result(email=${portfolioDO.email})}">[[${portfolioDO.portfolio_title}]]</a></td>
+          <td>[[${portfolioDO.nickname}]]</td>
+          <td style="width : 72px; table-layout:fixed;">[[${portfolioDO.post_date}]]</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="paging">
+        <th:block th:if="${totalPages > 0}">
+          <a th:href="@{/portfolio_board/search(page=1)}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><<</a>
+          <a th:href="@{/portfolio_board/search(page=${currentPage != 1 ? currentPage - 1 : currentPage})}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><</a>
+
+          <th:block th:each="pageNumber : ${#numbers.sequence(startPage, endPage)}">
+            <a th:href="@{/portfolio_board/search(page=${pageNumber})}" th:class="${pageNumber==currentPage}?'num on':'num'">
+              [[${pageNumber}]]
+            </a>
+          </th:block>
+
+          <a th:href="@{/portfolio_board/search(page=${currentPage != totalPages ? currentPage + 1 : currentPage})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">></a>
+          <a th:href="@{/portfolio_board/search(page=${totalPages})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">>></a>
+        </th:block>
+      </div>
+
+      <div class="paging1">
+        <a th:href="@{/portfolio_edit(email=${session.email})}" class="bt">내 포트폴리오 공개</a>
+      </div>
+    </div>
+  </main>
+  </body>
+</th:block>
+</html>

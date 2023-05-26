@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>로그인</title>
+  <link rel="stylesheet" th:href="@{/style/login.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <script th:inline="javascript">
+    var errorMsg = [[${error}]];
+    if (errorMsg != null){
+      alert(errorMsg);
+    }
+
+    var notLogin = [[${notLogin}]];
+    if (notLogin != null) {
+     alert(notLogin);
+    }
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+<body>
+  <main>
+    <form method="post" th:action = "@{/login}" id="loginForm" name="loginForm" >
+      <h1 class="loginText">로그인</h1>
+      <div class=box>
+        <div class=totalBox>
+          <span class="titleText">아이디</span>
+          <span class=inputBox>
+            <input type="email" id="email" class="id" name="email" placeholder="email@editube.com" required>
+          </span>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class=totalBox>
+          <span class="titleText">비밀번호</span>
+          <span class="inputBox"><input type="password" id="password"  name="password" class="password" placeholder="••••••••" required>
+          </span>
+        </div>
+      </div>
+      <button type="submit" class=loginButton>로그인</button>
+
+      <div class=moveNextPage>
+        <ul>
+          <li><a th:href="@{/signup_options}">회원가입</a></li>
+          <li><a th:href="@{/find_id}">아이디 찾기</a></li>
+          <li><a th:href="@{/find_password}">비밀번호 찾기</a></li>
+        </ul>
+      </div>
+    </form>
+  </main>
+  </body>
+</th:block>
+</html>

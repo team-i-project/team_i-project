@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>마이 페이지: 내 기본정보</title>
+  <link rel="stylesheet" th:href="@{/style/myPage.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+
+  <script>
+    function submitHandler() {
+      var nickname = document.querySelector('#nickname');
+
+      if(nickname.value.length > 9) {
+          alert("닉네임은 9글자 이하로 입력하세요.");
+          return false;
+      }
+    }
+
+    function init() {
+        var updateInfo = document.querySelector('#updateInfo');
+        updateInfo.onsubmit = submitHandler;
+    }
+
+    window.onload = init;
+
+  </script>
+  <script th:inline="javascript">
+        var addressSearch = [[@{/address-search}]];
+
+        function save(){
+            const useremail = document.getElementById("email").value;
+            const password1 = document.getElementById("password").value;
+            const password2 = document.getElementById("confirmPassword").value;
+            const username = document.getElementById("name").value;
+            const usernickname = document.getElementById("nickname").value;
+            const userphone = document.getElementById("phone_number").value;
+            const address1 = document.getElementById("input-address").value;
+            const address2 = document.getElementById("input-detail-address").value;
+            const gender = document.getElementById("gender").value;
+            const userbirth = document.getElementById("birth_date").value;
+
+            const userdata = {
+                email : useremail,
+                password : password1,
+                confirmPssword : password2,
+                name : username,
+                nickname : usernickname,
+                phone_number : userphone,
+                address : address1,
+                detail_addr : address2,
+                gender : gender,
+                birth_date : userbirth,
+            }
+
+            $.ajax({
+                url :"/try-join",
+                type:"post",
+                dataType : "json", // ajax가 받을때 자료형
+                contentType:"application/json", // 보낼때 자료형
+                data: JSON.stringify(userdata),
+                success:function(data){
+                    console.log(data)
+
+                    if(data.result == "성공!"){
+                        alert("회원가입 성공")
+                        location.href = "/";
+                    }else{
+                        alert("가입 실패 ㅠㅠ")
+                    }
+
+                    //console.log(result);
+                },
+                error: function (request, status, error){
+                    console.log(error)
+                    console.log(status)
+                    console.log(request)
+                    //실패햇을때 성공 로직.
+                    alert("가입 실패");
+                }
+            })
+        }
+
+        function road() {
+             const popup = window.open(addressSearch,"Popup", "width=800, height=700");
+
+             popup.onbeforeunload=(data)=>{
+                 console.log(data)
+                 console.log("데이터 체크")
+            }
+             // 팝업창에 데이터 쓰기
+             popup.document.write(data);
+        }
+
+        function test(){
+            $.ajax({
+                url: "https://business.juso.go.kr/addrlink/addrLinkUrl.do?confmKey=U01TX0FVVEgyMDIzMDUwMjE0MTI1MDExMzczNzM=&returnUrl=http://localhost:3030/road-return&resultType=4",
+                type: "GET",
+            })
+        }
+    </script>
+  <script th:inline="javascript">
+    var Msg = [[${msg}]];
+    if (Msg != null){
+      alert(Msg);
+    }
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+  <body>
+  <main>
+    <nav class="sideBar">
+      <ul>
+        <div class=menuPart>
+          <h2>마이 페이지</h2>
+          <li class="active"><a th:href="@{/myPage}">내 기본정보</a></li>
+
+          <li><a th:href="@{/my_recruit}" th:if="${session.type}=='유튜버'">작성한 구인글</a></li>
+
+          <li><a th:href="@{/applynow}" th:if="${session.type}=='편집자'">지원현황 확인</a></li>
+          <li><a th:href="@{/myPage/portfolio_result}" th:if="${session.type}=='편집자'">내 포트폴리오 보기</a></li>
+          <li><a th:href="@{/disableAccount}" class="disable">회원탈퇴 </a></li>
+        </div>
+
+      </ul>
+    </nav>
+
+    <div class="main">
+      <h3 class="right_info">내 기본 정보</h3>
+      <form th:action="@{/myPage}" id="updateInfo" method="post" modelAttribute="member">
+        <div class=idPart>
+          <div class=idArea>
+            <span class="idText">아이디</span>
+            <div class=idInput>
+              <input type="text" id="id" class="email"
+                     style="border: none; background: transparent;" th:value="${session.email}" disabled>
+            </div>
+          </div>
+        </div>
+        <a th:href="@{/changepwd}">
+          <button type="button" class=changepasswd>비밀번호변경</button>
+        </a>
+
+        <div class="namePart">
+          <div class=nameArea>
+            <span class="nameText">이름</span>
+            <div class=nameInput>
+              <input type="text" placeholder="홍길동" id="name" class="name"
+                     style="border: none; background: transparent;"
+                     th:value="${user.name}" name="name"
+              >
+            </div>
+          </div>
+        </div>
+        <div class="duplicateNickname" th:utext="${duplicateNickname}">
+        </div>
+        <div class="nicknamePart">
+          <div class=nicknameArea>
+            <span class="nicknameText">닉네임</span>
+            <div class=nicknameInput>
+              <input type="text" id="nickname" class="nickname" style="border: none; background: transparent;"
+                     th:value="${user.nickname}" name="nickname" >
+            </div>
+          </div>
+          <button type="button" class=searchAddrButton onclick="ConfirmNickname()">닉네임 확인</button>
+        </div>
+        <script th:inline="javascript">
+        var confirmNickname = [[@{/ConfirmNickname}]];
+
+        function ConfirmNickname() {
+            var inputValue = document.getElementById("nickname").value;
+            if (document.getElementById("nickname").value.length == 0) {
+                 alert("입력란이 공란입니다.");
+            }
+            else {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", confirmNickname, true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var newValue = xhr.responseText;
+                    var oldValue = 'false';
+                    var comparisonResult = oldValue === newValue ? "사용가능한 닉네임입니다." : "중복된 닉네임입니다.";
+                        alert(comparisonResult);
+
+                  }
+                }
+            };
+            var data = JSON.stringify({ "nickname": inputValue });
+            xhr.send(data);
+        }
+    </script>
+        <div class="duplicateNickname" th:utext="${duplicatePhoneNumber}"></div>
+        <div class="phonePart">
+          <div class=phoneArea>
+            <span class="phoneText">휴대전화</span>
+            <div class=phoneNumInput>
+              <input type="tel" id="phone_number" placeholder="010-9999-9999" class="phone"
+                     style="border: none; background: transparent;"
+                     th:value="${user.phone_number}" name="phone_number" >
+            </div>
+          </div>
+          <button type="button" class=searchAddrButton onclick="ConfirmPhoneNumber()">번호 확인</button>
+        </div>
+
+        <script th:inline="javascript">
+        var confirmPhoneNumber = [[@{/ConfirmPhoneNumber}]]
+
+        function ConfirmPhoneNumber() {
+            var inputValue = document.getElementById("phone_number").value;
+            if (document.getElementById("phone_number").value.length == 0) {
+                 alert("입력란이 공란입니다.");
+            }
+            else {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", confirmPhoneNumber, true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var newValue = xhr.responseText;
+                    var oldValue = 'false';
+                    var comparisonResult = oldValue === newValue ? "사용가능한 번호입니다." : "중복된 번호입니다.";
+                    alert(comparisonResult);
+                }
+              }
+            };
+            var data = JSON.stringify({ "phone_number": inputValue });
+            xhr.send(data);
+        }
+    </script>
+
+        <div class="addressPart">
+          <div class=addressArea>
+            <span class="addressText">도로명 주소</span>
+            <div class=addressInput>
+              <input type="text" id="address" placeholder="서울특별시 강남구 언주로 508" class="address"
+                     style="border: none; background: transparent;"
+                     th:value="${user.address}" name="address" >
+            </div>
+          </div>
+          <button type="button" onclick="road()" class=searchAddrButton>주소찾기</button>
+        </div>
+
+        <div class="detailaddressPart">
+          <div class=detailaddressArea>
+            <span class="detailaddressText">상세주소</span>
+            <div class=detailaddressInput>
+              <input type="text" id="detail_addr" placeholder="301호" class="detail_addr"
+                     style="border: none; background: transparent;"
+                     th:value="${user.detail_addr}" name="detail_addr" >
+            </div>
+          </div>
+        </div>
+
+
+        <div class="birthPart">
+          <div class=birthArea>
+            <span class="birthText">생년월일</span>
+            <div class=birthInput>
+              <input type="date" id="birth_date" class="birth_date"
+                     th:value="${user.birth_date}"name="birth_date" >
+            </div>
+          </div>
+        </div>
+        <input class="submit" type="submit" value="수정완료">
+      </form>
+    </div>
+  </main>
+  </body>
+</th:block>
+</html>

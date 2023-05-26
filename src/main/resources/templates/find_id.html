@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기</title>
+    <link rel="stylesheet" th:href="@{/style/find_id.css}">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+    <script th:inline="javascript">
+        var errorMsg = [[${error}]];
+        var getEmail = [[${email}]];
+        var getName = [[${name}]];
+        if (getEmail != null){
+            alert(getName + "님의 아이디는 " + getEmail + "입니다.");
+        }
+
+        if(errorMsg != null){
+            alert(errorMsg);
+        }
+    </script>
+</head>
+
+<th:block layout:fragment="content">
+<body>
+      <main>
+
+        <form id="findIdForm" name="findIdForm" method="POST" th:action = "@{/find_id}" modelAttribute="findIdFormData">
+            <h1 class="findIdText">아이디 찾기</h1>
+            <div class=box>
+                <div class=totalBox>
+                    <span class="titleText">이름</span>
+                    <span class=inputBox>
+                        <input type="text" placeholder="이름을 입력하세요." id="name" class="name" name = "name" required>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class=box>
+                <div class=totalBox>
+                    <span class="titleText">핸드폰 번호</span>
+                    <span class="inputBox"><input type="text" placeholder="010-0000-0000" id="phone_number"
+                            class="phone_number" name = "phone_number" required>
+                    </span>
+                </div>
+            </div>
+            <button type="submit" class="findIdButton">찾기</button>
+        </form>
+      </main>
+
+</body>
+</th:block>
+</html>

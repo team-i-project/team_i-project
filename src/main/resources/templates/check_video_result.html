@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="layout">
+<head>
+  <meta charset="UTF-8">
+  <title>내 정보 보기</title>
+  <link rel="stylesheet" th:href="@{/style/check_video_result.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <script th:inline="javascript">
+    var message = [[${msg}]];
+    if (message != null) {
+      alert(message);
+    }
+
+    var Msg = [[${param.msg}]];
+    if (Msg != null){
+      alert(Msg);
+    }
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+  <body>
+  <main>
+    <nav class="sideBar">
+      <ul>
+        <div class=menuPart>
+          <h2>마이 페이지</h2>
+          <li><a th:href="@{/myPage}">내 기본정보</a></li>
+
+          <li class="active"><a th:href="@{/my_recruit}" th:if="${session.type}=='유튜버'">작성한 구인글</a></li>
+
+          <li><a th:href="@{/applynow}" th:if="${session.type}=='편집자'">지원현황 확인</a></li>
+          <li><a th:href="@{/myPage/portfolio_result}" th:if="${session.type}=='편집자'">내 포트폴리오 보기</a></li>
+          <li><a th:href="@{/disableAccount}" class="disable">회원탈퇴 </a></li>
+        </div>
+
+      </ul>
+    </nav>
+
+    <div class="main">
+      <h3 class="right_info">지원자 확인</h3>
+      <hr>
+
+      <div class=container_check1>
+        <b><p class="labelname">닉네임 |</p> [[${ApplierNickName}]]</b>
+      </div>
+      <div class=container_check2>
+        <b>편집자가 구인자에게 하는 말</b>
+        <textarea th:if ="${applyEditorDO.editor_memo == ' '}" id="applymemo1" oninput="autoResize()" readonly>지원자가 메모를 남기지 않았습니다.</textarea>
+        <textarea th:if ="${applyEditorDO.editor_memo != ' '}" id="applymemo2" oninput="autoResize()" readonly>[[${applyEditorDO.editor_memo}]]]</textarea>
+      </div>
+
+
+      <div class='video-container'>
+        <b>지원자가 편집한 동영상입니다.</b>
+        <h4 th:if="${applyEditorDO.edited_link == ' '}" style ="color : #FF4949;">아직 지원자가 영상을 올리지 않았습니다.</h4>
+        <iframe th:if="${applyEditorDO.edited_link != ' '}" width="845" height="475" th:src="${applyEditorDO.edited_link}" frameborder="0" allow="accelerometer; autoplay;
+              clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+
+      <hr style = "background : gray; margin-top: 20px; height: 2px;">
+      <div class=container_check3>
+        <p>편집영상에 대한 메모를 남겨주세요.</p>
+      </div>
+
+      <form id="memo" th:method="POST" th:action="@{/check_video_result}">
+        <input th:type="hidden" name="apply_no" th:value="${applyEditorDO.apply_no}">
+        <input th:type="hidden" name="recruit_no" th:value="${applyEditorDO.recruit_no}">
+        <input th:type="hidden" name="editor_email" th:value="${applyEditorDO.editor_email}">
+        <textarea type="text" id="youtuber_memo1" oninput="autoResize()" name="youtuber_memo" th:if="${applyEditorDO.youtuber_memo eq ' '}" placeholder="테스트 영상 메모(구인자에게만 보입니다.)"></textarea>
+        <textarea type="text" id="youtuber_memo2" oninput="autoResize()" name="youtuber_memo" th:if="!${applyEditorDO.youtuber_memo eq ' '}">[[${applyEditorDO.youtuber_memo}]]</textarea>
+        <input id="btn" th:type="submit" th:onclick="return memo()" th:value="등록">
+      </form>
+    </div>
+  </main>
+  <script>
+  function autoResize() {
+    this.style.height = "auto"; /* reset to automatic height */
+    this.style.height = this.scrollHeight + "px"; /* set new height */
+  }
+  if(document.getElementById("applymemo1") != null) {
+    document.getElementById("applymemo1").addEventListener("input", autoResize);
+    autoResize.call(document.getElementById("applymemo1"));
+  }
+  if(document.getElementById("applymemo2") != null) {
+    document.getElementById("applymemo2").addEventListener("input", autoResize);
+    autoResize.call(document.getElementById("applymemo2"));
+  }
+  if(document.getElementById("youtuber_memo1") != null) {
+    document.getElementById("youtuber_memo1").addEventListener("input", autoResize);
+    autoResize.call(document.getElementById("youtuber_memo1"));
+  }
+  if(document.getElementById("youtuber_memo2") != null) {
+    document.getElementById("youtuber_memo2").addEventListener("input", autoResize);
+    autoResize.call(document.getElementById("youtuber_memo2"));
+  }
+</script>
+</body>
+</th:block>
+</html>

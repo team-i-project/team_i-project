@@ -1,0 +1,194 @@
+* {
+    font-family: Noto Sans KR;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 1300px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5%;
+    align-items: flex-start;
+}
+
+.sideBar {
+    float: left;
+    width: 26.33%;
+    height: auto;
+}
+
+.sideBar ul {
+    float: right;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menuPart {
+    float: right;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.sideBar li.active a {
+    color: #256BF4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sideBar li a {
+    color: black;
+    text-decoration: none;
+    font-weight: thin;
+}
+
+.sideBar li a:hover {
+    color: #256BF4;
+}
+
+.right_info {
+    color: rgba(29.000000171363354, 29.000000171363354, 32.00000189244747, 1);
+    position: relative;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.main {
+    float: left;
+    width: 65%;
+    height: auto;
+    padding: 50px;
+        border-left: 1px solid #B7B7B7;
+
+}
+
+.idPart,
+.namePart,
+.nicknamePart,
+.phonePart,
+.addressPart,
+.birthPart,
+.detailaddressPart {
+    background-color: rgba(246.0000005364418, 243.00000071525574, 243.00000071525574, 1);
+    width: 345px;
+    height: 63px;
+    position: relative;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.idArea,
+.nameArea,
+.nicknameArea,
+.phoneArea,
+.addressArea,
+.birthArea,
+.detailaddressArea {
+    width: 344px;
+    height: 45px;
+    position: absolute;
+    left: 16px;
+    top: 9px;
+}
+
+.idText,
+.nameText,
+.nicknameText,
+.phoneText,
+.addressText,
+.birthText,
+.detailaddressText {
+    color: rgba(111.00000098347664, 111.00000098347664, 111.00000098347664, 1);
+    width: 344px;
+    height: 17px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: -0.20000000298023224;
+}
+
+.idInput,
+.nameInput,
+.nicknameInput,
+.phoneNumInput,
+.addressInput,
+.birthInput,
+.detailaddressInput {
+    width: 400px;
+    height: 23px;
+    position: absolute;
+    left: 0px;
+    top: 22px;
+    font-size: 17px;
+}
+
+.submit {
+    background-color: #256BF4;
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    font-size: 17px;
+    margin-bottom: 30px;
+    margin-left: 60%;
+}
+
+.submit:hover {
+    background-color: #0058DD;
+}
+
+.changepasswd {
+    background-color: rgba(37.00000159442425, 107.00000122189522, 244.0000006556511, 1);
+    width: 250px;
+    height: 50px;
+    top: 465px;
+    border-radius: 8px;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+.duplicateNickname {
+    color: red;
+}
+
+input[type="text"] {
+    width: 310px;
+}
+
+#birth_date {
+    border: none;
+    background-color: transparent;
+}
+
+.searchAddrButton {
+  background-color: rgba(37.00000159442425, 107.00000122189522, 244.0000006556511, 1);
+  width: 100px;
+  height: 45px;
+  position: absolute;
+  right: -110px;
+  border-radius: 30px;
+  border: none;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  font-size: 17px;
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+.searchAddrButton:hover {
+  background-color: #ffffff;
+  color: #256BF4;
+  border: 2px solid #256BF4;
+}

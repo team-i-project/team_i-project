@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>마이 페이지: 내 구인글 확인</title>
+  <link rel="stylesheet" th:href="@{/style/my_recruit.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <script th:inline="javascript">
+    var Msg = [[${param.msg}]];
+    if (Msg != null){
+      alert(Msg);
+    }
+
+    function check(){
+      if (!confirm("정말 삭제 하시겠습니까?")) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+  <body>
+  <main>
+    <nav class="sideBar">
+      <ul>
+        <div class=menuPart>
+          <h2>마이 페이지</h2>
+          <li><a th:href="@{/myPage}">내 기본정보</a></li>
+
+          <li class="active"><a th:href="@{/my_recruit}" th:if="${session.type}=='유튜버'">작성한 구인글</a></li>
+
+          <li><a th:href="@{/applynow}" th:if="${session.type}=='편집자'">지원현황 확인</a></li>
+          <li><a th:href="@{/myPage/portfolio_result}" th:if="${session.type}=='편집자'">내 포트폴리오 보기</a></li>
+          <li><a th:href="@{/disableAccount}" class="disable">회원탈퇴 </a></li>
+        </div>
+
+      </ul>
+    </nav>
+
+    <div class="main">
+      <h3 class="right_info">내 구인글 확인</h3>
+      <hr>
+      <table class ="board_list">
+        <thead>
+        <tr>
+          <th>게시물 번호</th>
+          <th>게시일</th>
+          <th>제목</th>
+          <th>마감일</th>
+          <th>지원자</th>
+          <th>글 삭제</th>
+        </tr> <!-- 0511 준원-->
+        </thead>
+        <tbody>
+        <tr th:if="${NotRecruit}!=null"><td></td><td colspan="4">[[${NotRecruit}]]</td><td></td></tr>
+        <tr th:if="${myRecruitList}!=null" th:each="myRecruitList : ${myRecruitList}">
+          <td style="width : 70px; table-layout:fixed;">[[${myRecruitList.recruit_no}]]</td>
+          <td style="width : 72px; table-layout:fixed;" th:text = "${#temporals.format(myRecruitList.post_date, 'yyyy-MM-dd HH:mm:ss')}"></td>
+          <td style="width : 320px; table-layout:fixed;  word-break:break-all"><a th:href="@{/recruit_result(recruitNo=${myRecruitList.recruit_no})}">[[${myRecruitList.recruit_title}]]</a></td>
+          <td style="width : 72px; table-layout:fixed;">[[${myRecruitList.deadline}]]</td>
+          <td><button class="btn" th:onclick="'location.href=\''+ @{/applier_check(recruitNo=${myRecruitList.recruit_no})} + '\''">지원자 확인</button></td>
+          <td><a class="delete_btn" role="button" th:href="@{/recruit_delete_myPage(recruitNo=${myRecruitList.recruit_no})}" onclick="return check()">구인글 삭제</a></td>
+        </tbody>
+      </table>
+
+      <div class="paging">
+        <th:block th:if="${totalPages > 0}">
+          <a th:href="@{/my_recruit(page=1)}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><<</a>
+          <a th:href="@{/my_recruit(page=${currentPage != 1 ? currentPage - 1 : currentPage})}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><</a>
+
+          <th:block th:each="pageNumber : ${#numbers.sequence(startPage, endPage)}">
+            <a th:href="@{/my_recruit(page=${pageNumber})}" th:class="${pageNumber==currentPage}?'num on':'num'">
+              [[${pageNumber}]]
+            </a>
+          </th:block>
+
+          <a th:href="@{/my_recruit(page=${currentPage != totalPages ? currentPage + 1 : currentPage})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">></a>
+          <a th:href="@{/my_recruit(page=${totalPages})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">>></a>
+        </th:block>
+      </div>
+    </div>
+  </main>
+  </body>
+</th:block>
+</html>

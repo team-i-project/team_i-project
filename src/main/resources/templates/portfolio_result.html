@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>포트폴리오 조회</title>
+  <link rel="stylesheet" th:href="@{/style/portfolio_result.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <script th:inline="javascript">
+    var msg=[[${msg}]];
+    if(msg != null){
+      alert(msg);
+    }
+
+
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+  <body>
+  <main>
+    <div>
+      <h3 class="title">제목 : [[${portfolioDO.portfolio_title}]] </h3>
+    </div>
+    <hr>
+    <div id = "info">
+      <div class="box2" id = "main_link">
+        <p class="label">대표영상</p>
+        <div class='video-container'>
+          <iframe width="800" height="415"  th:src="${videoLink[0]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      <table>
+        <tr><td class="labelname"><p class="label">이름</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${user.name}]]</td></tr>
+        <tr><td class="labelname"><p class="label">아이디</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${user.email}]]</td></tr>
+        <tr><td class="labelname"><p class="label">성별</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${user.gender}]]</td></tr>
+        <tr><td class="labelname"><p class="label">근무 가능 지역</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${portfolioDO.workable_location}]]</td></tr>
+        <tr><td class="labelname"><p class="label">작성일</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${portfolioDO.post_date}]]</td></tr>
+        <tr><td class="labelname"><p class="label">편집툴</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${returnTools}]]</td></tr>
+      </table>
+      <p class="label">하고 싶은 말</p>
+      <textarea id="myTextarea3" oninput="autoResize()" readonly>[[${portfolioDO.message}]]</textarea>
+      <br />
+      <div>
+        <p class="label">유튜브 편집 경력 </p>
+        <textarea id="myTextarea1" oninput="autoResize()" readonly>[[${portfolioDO.YOUTUBE_CAREER}]]</textarea>
+      </div>
+      <div>
+        <p class="label">다른 기업 경력 </p>
+        <textarea id="myTextarea2" oninput="autoResize()" readonly>[[${portfolioDO.othercareer}]]</textarea>
+      </div>
+    </div>
+
+    </div>
+
+    <hr>
+    <table>
+      <tr><td class="labelname2"><p class="label">희망 급여</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${portfolioDO.desiredsalary}]]</tr>
+      <tr><td class="labelname2"><p class="label">희망 근무 형태</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${portfolioDO.desiredworktype}]]</tr>
+      <tr><td class="labelname2"><p class="label">구인자에게 한 마디</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td>[[${portfolioDO.messagetoyoutuber}]]</tr>
+    </table>
+    <hr>
+    <div class="root1">
+      <th:block th:if="${videoLink[1]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[1]} != null" th:src="${videoLink[1]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[2]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[2]} != null" th:src="${videoLink[2]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[3]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[3]} != null" th:src="${videoLink[3]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[4]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[4]} != null" th:src="${videoLink[4]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+    </div>
+    <div class="root1">
+      <th:block th:if="${videoLink[5]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[5]} != null" th:src="${videoLink[5]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[6]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[6]} != null" th:src="${videoLink[6]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[7]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[7]} != null" th:src="${videoLink[7]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[8]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[8]} != null" th:src="${videoLink[8]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+    </div>
+    <div class="root1">
+      <th:block th:if="${videoLink[9]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[9]} != null" th:src="${videoLink[9]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[10]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[10]} != null" th:src="${videoLink[10]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[11]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[11]} != null" th:src="${videoLink[11]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+      <th:block th:if="${videoLink[12]} != null">
+      <div class="box5">
+        <div class='video-container'>
+          <iframe width="560" height="315" th:if="${videoLink[12]} != null" th:src="${videoLink[12]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      </th:block>
+    </div>
+
+
+    <a class="btn" role="button" th:if="${portfolioDO.email}==${session.email}" th:href="@{/portfolio_edit(email=${portfolioDO.email})}" >수정</a>
+    <a class="btn" role="button" th:if="${portfolioDO.email}==${session.email} or ${session.type eq '관리자'}" th:href="@{/portfolio_delete(email1=${portfolioDO.email})}" >삭제</a>
+
+  </main>
+  <script>
+  function autoResize() {
+    this.style.height = "auto"; /* reset to automatic height */
+    this.style.height = this.scrollHeight + "px"; /* set new height */
+  }
+  document.getElementById("myTextarea1").addEventListener("input", autoResize);
+  document.getElementById("myTextarea2").addEventListener("input", autoResize);
+  document.getElementById("myTextarea3").addEventListener("input", autoResize);
+  autoResize.call(document.getElementById("myTextarea1"));
+  autoResize.call(document.getElementById("myTextarea2"));
+  autoResize.call(document.getElementById("myTextarea3"));
+</script>
+  </body>
+</th:block>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>구인글 게시판: 게시물 상세</title>
+    <link rel="stylesheet" th:href="@{/style/recruit_result.css}">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+    <script th:inline="javascript">
+    var msg=[[${msg}]];
+    if(msg != null){
+      alert(msg);
+    }
+
+    function check(){
+        if (!confirm("정말 삭제 하시겠습니까?")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+  </script>
+</head>
+<th:block layout:fragment="content">
+    <body>
+
+    <main>
+        <div class="job">
+            <div class="box1">
+                <div>
+                    <h1 >제목 :[[${recruitDO.title}]] </h1>  <!--RECRUIT_TITLE 제목  -->
+                </div>
+                <hr>
+                <p style = "float:right;">마감일 : [[${recruitDO.deadline}]]</p>
+                <div class="root">
+                    <div id="imgBox">
+                        <img th:src="${infoDO.channel_photo}" alt="Image" style="border-radius: 100%; width: 100px; height: 100px;">
+                    </div>
+                    <div class="box2">
+                        <table>
+                            <tr><td class="labelname"><label>채널명</label></td><td>&nbsp;:&nbsp;</td><td>[[${infoDO.channel_name}]]</td></tr>
+                            <tr><td class="labelname"><label>구독자수</label></td><td>&nbsp;:&nbsp;</td><td>[[${infoDO.subscribe}]]</td></tr>
+                            <tr><td class="labelname"><label>영상 수</label></td><td>&nbsp;:&nbsp;</td><td>[[${infoDO.video_count}]]</td></tr>
+                            <tr><td class="labelname"><label>총 조회수</label></td><td>&nbsp;:&nbsp;</td><td>[[${infoDO.view_count}]]</td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div name = "box1">
+                    <table>
+                        <tr><td class="labelname"><label>카테고리</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${categories}]]</span></td></tr>
+                        <tr><td class="labelname"><label>직무</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${recruitDO.duty}]]</span></td></tr>
+                        <tr><td class="labelname"><label>작업량</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${recruitDO.workLoad}]]</span></td></tr>
+                        <tr><td class="labelname"><label>자격 요건</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${recruitDO.RequireMent}]]</span></td></tr>
+                        <tr><td class="labelname"><label>급여</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${recruitDO.salary}]]원</span></td></tr>
+                        <tr><td class="labelname"><label>급여 상세</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${recruitDO.salaryDetail}]]</span></td></tr>
+                        <tr><td class="labelname"><label>우대 사항</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${recruitDO.preference}]]</span></td></tr>
+                        <tr><td class="labelname"><label>편집 툴</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${tools}]]</span></td></tr>
+                        <tr><td class="labelname"><label>근무 환경</label></td><td>&nbsp;:&nbsp;</td><td><span>[[${recruitDO.environment}]]</span></td></tr>
+                    </table>
+                </div>
+                <div style = "margin-top : 10px;">
+                    <label >복리 후생 </label>&nbsp;:
+                        <textarea id="myTextarea1" oninput="autoResize()" readonly>[[${recruitDO.welfare}]]</textarea><br>
+                    <label>상세 모집 내용 </label>&nbsp;:
+                        <textarea id="myTextarea2" oninput="autoResize()" readonly>[[${recruitDO.recruit_Detail}]]</textarea>
+                </div>
+                <br>
+                <label>구직자가 편집 해야하는 동영상입니다.</label>
+                <div class='video-container'>
+                    <iframe width="560" height="315"  th:src="${recruitDO.original_link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <meta name="description" content="설명">
+                <!--편집자 회원-->
+                <div class="paging1">
+                    <a class="btn" th:href="@{/apply(recruitNo=${recruitDO.recruitNo})}" th:if="${recruitDO.overdate} == true and ${session.type == '편집자'}">지원하기</a>
+                </div>
+                <!--작성자(유튜버)-->
+                <a class="delete_btn" role="button" th:href="@{/recruit_delete(recruitNo=${recruitDO.recruitNo})}" th:if="${recruitDO.overdate} == true and ${recruitDO.email}==${session.email} or ${session.type eq '관리자'}" onclick="return check()">삭제</a>
+                <a  th:href="@{/recruit_board_modify(recruitNo=${recruitDO.recruitNo})}" th:if ="${recruitDO.overdate} == true and ${recruitDO.email}==${session.email}"  class="btn">수정하기</a>
+            </div>
+        </div>
+    </main>
+    <script>
+  function autoResize() {
+    this.style.height = "auto"; /* reset to automatic height */
+    this.style.height = this.scrollHeight + "px"; /* set new height */
+  }
+  document.getElementById("myTextarea1").addEventListener("input", autoResize);
+  document.getElementById("myTextarea2").addEventListener("input", autoResize);
+  autoResize.call(document.getElementById("myTextarea1"));
+  autoResize.call(document.getElementById("myTextarea2"));
+</script>
+    </body>
+</th:block>
+</html>

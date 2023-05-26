@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>마이 페이지: 지원자 확인</title>
+  <link rel="stylesheet" th:href="@{/style/applier_check.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+
+</head>
+
+<th:block layout:fragment="content">
+  <body>
+  <main>
+    <nav class="sideBar">
+      <ul>
+        <div class=menuPart>
+          <h2>마이 페이지</h2>
+          <li><a th:href="@{/myPage}">내 기본정보</a></li>
+
+          <li class="active"><a th:href="@{/my_recruit}" th:if="${session.type}=='유튜버'">작성한 구인글</a></li>
+
+          <li><a th:href="@{/applynow}" th:if="${session.type}=='편집자'">지원현황 확인</a></li>
+          <li><a th:href="@{/myPage/portfolio_result}" th:if="${session.type}=='편집자'">내 포트폴리오 보기</a></li>
+          <li><a th:href="@{/disableAccount}" class="disable">회원탈퇴 </a></li>
+        </div>
+
+      </ul>
+    </nav>
+
+    <div class="main">
+      <h3 class="right_info">지원자 확인</h3>
+      <hr>
+      <table class ="board_list">
+        <thead>
+        <tr>
+          <th>게시물 번호</th>
+          <th >제목</th>
+          <th>지원자</th>
+          <th>포트폴리오</th>
+          <th>편집영상</th>
+        </tr> <!-- 0511 준원-->
+        </thead>
+        <tbody>
+        <tr th:if="${NotApply}!=null"><td></td><td>[[${NotApply}]]</td><td></td></tr>
+        <tr th:each="applierListDO : ${applierListDO}">
+          <td style="width : 72px; table-layout:fixed;">[[${applierListDO.recruit_no}]]</td>
+          <td style="width : 320px; table-layout:fixed; word-break:break-all">[[${applierListDO.portfolioTitle}]]</td>
+          <td style="width : 120px; table-layout:fixed;">[[${applierListDO.nickname}]]</td>
+          <td style="width : 120px; table-layout:fixed;"><button class="btn" th:onclick="'location.href=\''+ @{/portfolio_result(email=${applierListDO.email}, recruit_no=${applierListDO.recruit_no})} + '\''">
+            포트폴리오</button></td>
+          <td style="width : 120px; table-layout:fixed;"><button class="btn" th:onclick="'location.href=\''+ @{/check_video_result(editor_email=${applierListDO.email}, recruit_no=${applierListDO.recruit_no})} + '\''">편집영상확인</button></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="paging">
+        <th:block th:if="${totalPages > 0}">
+          <a th:href="@{/applier_check(page=1, recruitNo=${recruitNo})}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><<</a>
+          <a th:href="@{/applier_check(page=${currentPage != 1 ? currentPage - 1 : currentPage}, recruitNo=${recruitNo})}" th:class="${currentPage == 1} ? 'bt disabled' : 'bt'"><</a>
+
+          <th:block th:each="pageNumber : ${#numbers.sequence(startPage, endPage)}">
+            <a th:href="@{/applier_check(page=${pageNumber}, recruitNo=${recruitNo})}" th:class="${pageNumber==currentPage}?'num on':'num'">
+              [[${pageNumber}]]
+            </a>
+          </th:block>
+
+          <a th:href="@{/applier_check(page=${currentPage != totalPages ? currentPage + 1 : currentPage}, recruitNo=${recruitNo})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">></a>
+          <a th:href="@{/applier_check(page=${totalPages}, recruitNo=${recruitNo})}" th:class="${currentPage == totalPages} ? 'bt disabled' : 'bt'">>></a>
+        </th:block>
+      </div>
+
+    </div>
+  </main>
+  </body>
+</th:block>
+</html>

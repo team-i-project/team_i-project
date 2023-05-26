@@ -1,0 +1,121 @@
+* {
+    font-family: Noto Sans KR;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 1100px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5%;
+    align-items: center;
+}
+
+hr {
+    background: #256BF4;
+    height: 3px;
+    border: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.carousel{
+    width : 100%;
+}
+.carousel-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.carousel-item{
+    width:100%;
+    height: 100%;
+}
+
+.carousel-item > img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle
+
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 40px;
+
+}
+
+.search-input {
+    font-size: 20px;
+    flex: 1;
+    border: 1px solid lightgray;
+    border-radius: 25px 0 0 25px;
+    padding: 10px 15px;
+    outline: none;
+}
+
+.search-input:focus {
+    border: 1px solid #256BF4;
+}
+
+.search-button {
+    font-size: 20px;
+    background-color: #256BF4;
+    color: white;
+    border: 1px solid #256BF4;
+    border-radius: 0 25px 25px 0;
+    padding: 10px 15px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.search-button:hover {
+    background-color: white;
+    color: #256BF4;
+    border: 1px solid #256BF4;
+}
+
+.button-container {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.button {
+    width: 225px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #256BF4;
+    border: 2px solid #256BF4;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #256BF4;
+    color: #ffffff;
+}
+
+.button-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}

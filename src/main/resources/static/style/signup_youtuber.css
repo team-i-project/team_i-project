@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Noto Sans KR;
+}
+
+main {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.button {
+  background-color: rgba(37.00000159442425, 107.00000122189522, 244.0000006556511, 1);
+  width: 345px;
+  height: 61px;
+  position: absorlute;
+  top: 465px;
+  border-radius: 8px;
+  border: none;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  font-size: 17px;
+  margin-bottom: 30px;
+}
+
+.button:hover {
+  background-color: #ffffff;
+  color: #256BF4;
+}
+
+.button-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.inputBox {
+  width: 149px;
+  height: 23px;
+  position: absolute;
+  left: 0px;
+  top: 22px;
+}
+
+.titleText {
+  color: rgba(111.00000098347664, 111.00000098347664, 111.00000098347664, 1);
+  width: 344px;
+  height: 17px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: -0.20000000298023224;
+}
+
+.totalBox {
+  width: 344px;
+  height: 45px;
+  position: absolute;
+  left: 16px;
+  top: 9px;
+}
+
+.box {
+  background-color: rgb(245, 245, 245);
+  width: 345px;
+  height: 63px;
+  position: relative;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid rgb(245, 245, 245);
+}
+
+.box:hover {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #256BF4;
+}
+
+.address {
+  position: relative;
+}
+
+.inputValue {
+  border: none;
+  background: transparent;
+  color: rgba(29.000000171363354, 29.000000171363354, 32.00000189244747, 1);
+  position: absolute;
+  text-align: left;
+  font-size: 16px;
+  width: 300px;
+}
+
+.signUpButton {
+  background-color: rgba(37.00000159442425, 107.00000122189522, 244.0000006556511, 1);
+  width: 345px;
+  height: 61px;
+  border-radius: 8px;
+  border: none;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  font-size: 17px;
+  margin-top: 20px;
+}
+
+.signUpButton:hover {
+  background-color: #ffffff;
+  color: #256BF4;
+  border: 2px solid #256BF4;
+}
+
+.searchAddrButton {
+  background-color: rgba(37.00000159442425, 107.00000122189522, 244.0000006556511, 1);
+  width: 100px;
+  height: 45px;
+  position: absolute;
+  right: -110px;
+  border-radius: 30px;
+  border: none;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  font-size: 15px;
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+.searchAddrButton:hover {
+  background-color: #ffffff;
+  color: #256BF4;
+  border: 2px solid #256BF4;
+}
+.channelCertificate {
+    margin-top: 0px;
+}
+
+#certifi_text {
+    text-align:center;
+}
+
+#birth_date {
+    border: none;
+    background-color: transparent;
+}
+
+.completeBox {
+    border: 2px solid #256BF4;
+    border-radius: 10%;
+}

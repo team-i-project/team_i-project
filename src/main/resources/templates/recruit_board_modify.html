@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>구인글 게시판: 게시물 수정</title>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/style/recruit_board_edit.css}">
+  <script th:inline="javascript">
+    function submitHandler() {
+
+      const channel = 'input[name="channel_categories"]:checked';
+      const selectedchannel =
+              document.querySelectorAll(channel);
+      let channel_result = '';
+      selectedchannel.forEach((el) => {
+        channel_result += el.value + ' ';
+      });
+
+      const tools = 'input[name="edit_tools"]:checked';
+      const selectedtools =
+              document.querySelectorAll(tools);
+
+      let tools_result = '';
+      selectedtools.forEach((el) => {
+        tools_result += el.value + ' ';
+      })
+
+      var video_link = document.getElementById("originallink").value;
+      console.log(video_link);
+
+      if(channel_result == '') {
+        alert("채널 카테고리를 하나 이상 선택하세요");
+        return false;
+      }
+      else if(tools_result == '') {
+        alert("편집툴을 하나 이상 선택하세요");
+        return false;
+      }
+      else if(video_link.includes("https://www.youtube.com/embed/") || video_link.includes("https://www.youtube.com/watch?v=") || video_link.includes("https://youtu.be/") || video_link.includes("https://www.youtube.com/live/")){
+        if(video_link.includes("https://www.youtube.com/embed/")){
+          return true;
+        }
+      }
+      else {
+        alert("유튜브 동영상 링크가 아닙니다.\n반드시 유튜브 동영상 링크를 넣어주세요!!!");
+          return false;
+      }
+    }
+
+    function init() {
+      var signupForm = document.querySelector('#recruitWriteForm');
+      signupForm.onsubmit = submitHandler;
+    }
+    window.onload = init;
+
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+  <body>
+  <main>
+    <div class="job">
+      <form id="recruitWriteForm" name="recruitWriteForm" method="POST" th:action = "@{/recruit_board_modify}">
+        <div>
+          <h1>제목 : <input type="text" placeholder="제목을 입력하세요" id="recruit_title" name = "recruit_title" style = "height : 40px; width : 85%; font-size : 20px;" th:value = "${recruitDO.title}" required></h1>
+        </div>
+        <hr>
+        <div>
+          <b>채널 정보는 자동으로 삽입됩니다.</b>
+        </div>
+        <div>
+          <div class="inputBox" name = "channels">
+            <label class="titleText"><p>유튜브 채널 카테고리</p> : </label>
+            <label><input type="checkbox" name="channel_categories" value = "먹방" th:checked = "${returnCategory[0]}"> 먹방</label>
+            <label><input type="checkbox" name="channel_categories" value = "게임" th:checked = "${returnCategory[1]}"> 게임</label>
+            <label><input type="checkbox" name="channel_categories" value = "일상" th:checked = "${returnCategory[2]}"> 일상</label>
+            <label><input type="checkbox" name="channel_categories" value = "요리" th:checked = "${returnCategory[3]}"> 요리</label>
+            <label><input type="checkbox" name="channel_categories" value = "음악" th:checked = "${returnCategory[4]}"> 음악</label>
+            <label><input type="checkbox" name="channel_categories" value = "영화" th:checked = "${returnCategory[5]}"> 영화</label>
+            <label><input type="checkbox" name="channel_categories" value = "스포츠" th:checked = "${returnCategory[6]}"> 스포츠</label>
+            <label><input type="checkbox" name="channel_categories" value = "학습" th:checked = "${returnCategory[7]}"> 학습</label>
+            <label><input type="checkbox" name="channel_categories" value = "소통" th:checked = "${returnCategory[8]}"> 소통</label><br/>
+            <div name = "sub" style = "margin-left: 164px;">
+              <label><input type="checkbox" name="channel_categories" value = "자동차" th:checked = "${returnCategory[9]}"> 자동차</label>
+              <label><input type="checkbox" name="channel_categories" value = "IT" th:checked = "${returnCategory[10]}"> IT</label>
+              <label><input type="checkbox" name="channel_categories" value = "이슈" th:checked = "${returnCategory[11]}"> 이슈</label>
+              <label><input type="checkbox" name="channel_categories" value = "동물" th:checked = "${returnCategory[12]}"> 동물</label>
+              <label><input type="checkbox" name="channel_categories" value = "기타" th:checked = "${returnCategory[13]}"> 기타</label>
+            </div>
+          </div><br>
+          <div class = "inputBox" name = "inputValue" id = "inputValue">
+            <table>
+              <tr><td><p>마감일</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><input type="date" name="deadline" id = "deadline" th:value = "${recruitDO.deadline}" required></td></tr>
+              <tr><td><p>직무</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><input type="text" style = "width: 300px;" th:value = "${recruitDO.duty}" placeholder="직무를 입력 하세요" name = "duty" required></td></tr>
+              <tr><td><p>작업량</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><input type="text" style = "width: 300px;" placeholder="일주일 작업량을 입력 하세요" name = "workload" th:value = "${recruitDO.workLoad}" required></td></tr>
+              <tr><td><p>자격 요건</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><input type="text" style = "width: 300px;" placeholder="자격요건을 입력 하세요" name = "requirement" th:value = "${recruitDO.RequireMent}" required></td></tr>
+              <tr><td><p>급여</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><input type="number" style = "width: 300px;" placeholder="급여를 입력 하세요" name = "salary" th:value = "${recruitDO.salary}" required></td></tr>
+              <tr><td><p>급여 상세</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><input type="text" style = "width: 300px;" placeholder="급여 상세를 입력 하세요" name = "salary_detail" th:value = "${recruitDO.salaryDetail}" required></td></tr>
+              <tr><td><p>우대 사항</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><input type="text" style = "width: 300px;" placeholder="우대 사항을 입력 하세요" name = "preference" th:value = "${recruitDO.preference}" required></td></tr>
+              <tr><td><p>근무 환경</p></td><td>&nbsp;&nbsp;:&nbsp;&nbsp;</td><td><input type="text" style = "width: 300px;" placeholder="근무 환경을 입력 하세요" name = "environment" th:value = "${recruitDO.environment}" required></td></tr>
+            </table>
+          </div>
+          <div class="inputBox edit" name = "edits">
+            <label class="titleText"><p>편집 툴</p> : </label>
+            <label><input type="checkbox" name="edit_tools" value = "프리미어프로" th:checked = "${returnTools[0]}" > 프리미어 프로</label>
+            <label><input type="checkbox" name="edit_tools" value = "애프터이펙트" th:checked = "${returnTools[1]}"> 애프터 이펙트</label>
+            <label><input type="checkbox" name="edit_tools" value = "베가스" th:checked = "${returnTools[2]}"> 베가스</label>
+            <label><input type="checkbox" name="edit_tools" value = "파이널컷" th:checked = "${returnTools[3]}"> 파이널 컷</label>
+            <label><input type="checkbox" name="edit_tools" value = "파워디렉터" th:checked = "${returnTools[4]}"> 파워 디렉터</label>
+            <label><input type="checkbox" name="edit_tools" value = "포토샵" th:checked = "${returnTools[5]}"> 포토샵</label><br>
+            <div name = "sub" style = "margin-left: 65px;">
+              <label><input type="checkbox" name="edit_tools" value = "일러스트레이터" th:checked = "${returnTools[6]}"> 일러스트레이터</label>
+              <label><input type="checkbox" name="edit_tools" value = "마야" th:checked = "${returnTools[7]}"> MaYa</label>
+              <label><input type="checkbox" name="edit_tools" value = "블렌더" th:checked = "${returnTools[8]}"> Blender</label>
+              <label><input type="checkbox" name="edit_tools" value = "기타" th:checked = "${returnTools[9]}"> 기타</label>
+            </div>
+          </div><br>
+
+          <label> <p>복리 후생</p> : <textarea id="myTextarea1" oninput="autoResize()" class="input1" type="text" placeholder="복리 후생을 입력 하세요" name = "welfare" required>[[${recruitDO.welfare}]]</textarea></label><br>
+          <label> <p>상세 모집 내용</p> : <textarea id="myTextarea2" oninput="autoResize()" class="input2" type="text" placeholder="상세 모집 내용을 입력 하세요" name = "recruit_detail" required>[[${recruitDO.recruit_Detail}]]</textarea></label><br>
+        </div>
+        <br>
+        <div>
+          유튜브 채널 링크 또는 지원자들이 편집해야하는 영상 링크를 넣어주세요! <br>
+          <input type="text" placeholder = "www.youtube.com" name = "original_link" id = "originallink" th:value = "${recruitDO.original_link}" required>
+        </div>
+
+        <input  th:value = "${recruitDO.recruitNo}" th:name = "recruitNo" id = "recruitNo" type="hidden"/>
+        <button class="btn" onsubmit="init()" type = "submit">수정완료</button>
+
+      </form>
+    </div>
+  </main>
+
+  </body>
+  <script>
+    //일부러 여기다 뒀어요!!!!!!!! 이래야 getElementById가 먹힘. html은 위에서부터 순차적으로 읽기 때문
+    var today = new Date();
+    today.setUTCHours(today.getUTCHours() + 9);
+    var formattedDate = today.toISOString().substr(0, 10);
+    document.getElementById("deadline").setAttribute("min", formattedDate);
+  </script>
+  <script>
+  function autoResize() {
+    this.style.height = "auto"; /* reset to automatic height */
+    this.style.height = this.scrollHeight + "px"; /* set new height */
+  }
+  document.getElementById("myTextarea1").addEventListener("input", autoResize);
+  document.getElementById("myTextarea2").addEventListener("input", autoResize);
+  autoResize.call(document.getElementById("myTextarea1"));
+  autoResize.call(document.getElementById("myTextarea2"));
+</script>
+</th:block>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" style = "height:2100px">
+
+<head>
+  <meta charset="UTF-8">
+  <title>마이페이지: 편집영상 제출</title>
+  <link rel="stylesheet" th:href="@{/style/applynow_upload.css}">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
+
+  <script th:inline="javascript">
+    var msg=[[${errormsg}]];
+    if(msg != null){
+      alert(msg);
+    }
+
+    function submitHandler() {
+      var video_link = document.getElementById("edited_link").value;
+
+      if(!(video_link.includes("https://www.youtube.com/watch?v=")) && !(video_link.includes("https://youtu.be/"))
+              && !(video_link.includes("https://www.youtube.com/live/")) && !(video_link.includes("https://www.youtube.com/embed/"))){
+        alert("유튜브 동영상 링크가 아닙니다.\n반드시 유튜브 동영상 링크를 넣어주세요!!");
+        return false;
+      }
+    }
+
+    function init() {
+      var signupForm = document.querySelector('#applyUploadForm');
+      signupForm.onsubmit = submitHandler;
+    }
+    window.onload = init;
+
+  </script>
+</head>
+
+<th:block layout:fragment="content">
+  <body style = "height:100%">
+  <main>
+    <nav class="sideBar">
+      <ul>
+        <div class=menuPart>
+          <h2>마이 페이지</h2>
+          <li><a th:href="@{/myPage}">내 기본정보</a></li>
+
+          <li><a th:href="@{/my_recruit}" th:if="${session.type}=='유튜버'">작성한 구인글</a></li>
+
+          <li class="active"><a th:href="@{/applynow}" th:if="${session.type}=='편집자'">지원현황 확인</a></li>
+          <li><a th:href="@{/myPage/portfolio_result}" th:if="${session.type}=='편집자'">내 포트폴리오 보기</a></li>
+          <li><a th:href="@{/disableAccount}" class="disable">회원탈퇴 </a></li>
+        </div>
+
+      </ul>
+    </nav>
+
+    <div class="main">
+      <h3 class="right_info">편집영상 제출</h3>
+      <hr class="hr1">
+      <div class="box1">
+        <p style = "float:right;">마감일 : [[${recruitDO.deadline}]]</p>
+        <div class="root">
+          <div id="imgBox">
+            <img th:src="${infoDO.channel_photo}" alt="Image" style="border-radius: 100%; width: 100px; height: 100px;">
+          </div>
+          <div class="box2">
+            <table>
+              <tr><td class="labelname"><label>채널명</label></td><td>&nbsp;:&nbsp;</td><td>[[${infoDO.channel_name}]]</td></tr>
+              <tr><td class="labelname"><label>구독자수</label></td><td>&nbsp;:&nbsp;</td><td>[[${infoDO.subscribe}]]</td></tr>
+              <tr><td class="labelname"><label>영상 수</label></td><td>&nbsp;:&nbsp;</td><td>[[${infoDO.video_count}]]</td></tr>
+              <tr><td class="labelname"><label>총 조회수</label></td><td>&nbsp;:&nbsp;</td><td>[[${infoDO.view_count}]]</td></tr>
+            </table>
+          </div>
+        </div>
+        </div>
+        <div class = "box1">
+          <table>
+            <tr><td class="labelname"><label>카테고리</label></td><td>&nbsp;:&nbsp;</td><td>[[${categories}]]</td></tr>
+            <tr><td class="labelname"><label>직무</label></td><td>&nbsp;:&nbsp;</td><td>[[${recruitDO.duty}]]</td></tr>
+            <tr><td class="labelname"><label>작업량</label></td><td>&nbsp;:&nbsp;</td><td>[[${recruitDO.workLoad}]]</td></tr>
+            <tr><td class="labelname"><label>자격 요건</label></td><td>&nbsp;:&nbsp;</td><td>[[${recruitDO.RequireMent}]]</td></tr>
+            <tr><td class="labelname"><label>급여</label></td><td>&nbsp;:&nbsp;</td><td>[[${recruitDO.salary}]]원</td></tr>
+            <tr><td class="labelname"><label>급여 상세</label></td><td>&nbsp;:&nbsp;</td><td>[[${recruitDO.salaryDetail}]]</td></tr>
+            <tr><td class="labelname"><label>우대 사항</label></td><td>&nbsp;:&nbsp;</td><td>[[${recruitDO.preference}]]</td></tr>
+            <tr><td class="labelname"><label>편집 툴</label></td><td>&nbsp;:&nbsp;</td><td>[[${tools}]]</td></tr>
+            <tr><td class="labelname"><label>근무 환경</label></td><td>&nbsp;:&nbsp;</td><td>[[${recruitDO.environment}]]</td></tr>
+          </table>
+        </div>
+        <div class="box3" style = "margin-top : 10px;">
+          <label >복리 후생 </label>&nbsp;:
+          <textarea id="myTextarea1" oninput="autoResize()" readonly>[[${recruitDO.welfare}]]</textarea><br>
+          <label>상세 모집 내용 </label>&nbsp;:
+          <textarea id="myTextarea2" oninput="autoResize()" readonly>[[${recruitDO.recruit_Detail}]]</textarea>
+        </div>
+
+        <br>
+        <div class="box3">
+          <label>구직자가 편집 해야하는 동영상입니다.</label>
+          <div class='video-container'>
+            <iframe width="660" height="371"  th:src="${recruitDO.original_link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <hr />
+        <form style = "margin-top:10px;" id="applyUploadForm" name="applyUploadForm" th:action = "@{/applynow_upload}" method="post">
+          <h3><p class="editlink">편집 영상</p> :
+            <input type="text" placeholder="편집된 유튜브 영상 링크를 꼭 넣어주세요" id = "edited_link" name ="edited_link" th:value ="${applyEditorDO.edited_link}" required style = "width: 79%; margin-left: 5px;"></h3>
+          <div class="root">
+            <div>
+              <textarea id="myTextarea3" oninput="autoResize()" type="text" placeholder="구인자에게 하고 싶은 말을 쓰세요" name = "editor_memo" required>[[${applyEditorDO.editor_memo}]]</textarea>
+            </div>
+          </div>
+          <input type="hidden" th:name="recruitNo" th:value="${recruitDO.recruitNo}"/>
+          <button type="submit" class="btn" onsubmit="init()">제출하기</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script>
+  function autoResize() {
+    this.style.height = "auto"; /* reset to automatic height */
+    this.style.height = this.scrollHeight + "px"; /* set new height */
+  }
+  document.getElementById("myTextarea1").addEventListener("input", autoResize);
+  document.getElementById("myTextarea2").addEventListener("input", autoResize);
+  document.getElementById("myTextarea3").addEventListener("input", autoResize);
+  autoResize.call(document.getElementById("myTextarea1"));
+  autoResize.call(document.getElementById("myTextarea2"));
+  autoResize.call(document.getElementById("myTextarea3"));
+</script>
+  </body>
+</th:block>
+</html>

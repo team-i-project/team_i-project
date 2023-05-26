@@ -1,0 +1,175 @@
+* {
+    font-family: Noto Sans KR;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 1300px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5%;
+    align-items: flex-start;
+}
+
+.sideBar {
+    float: left;
+    width: 26.33%;
+    height: auto;
+}
+
+.sideBar ul {
+    float: right;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menuPart {
+    float: right;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.sideBar li.active a {
+    color: #256BF4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sideBar li a {
+    color: black;
+    text-decoration: none;
+    font-weight: thin;
+}
+
+.sideBar li a:hover {
+    color: #256BF4;
+}
+
+/* 마우스 올리는*/
+
+
+
+
+.right_info {
+    color: rgba(29.000000171363354, 29.000000171363354, 32.00000189244747, 1);
+    position: relative;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+hr {
+    background: #256BF4;
+    height: 3px;
+    border: 0;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.main {
+    float: left;
+    width: 65%;
+    height: auto;
+    padding: 50px;
+        border-left: 1px solid #B7B7B7;
+}
+
+/* 회원탈퇴 */
+
+
+
+
+.container_check1 {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 15px 0px 8px 0px;;
+}
+
+.container_check2 {
+    margin: 8px 0px 15px 0px;;
+}
+
+.container_check3 {
+    margin: 15px 0px 15px 0px;;
+}
+
+.result_btn {
+    background-color: #256BF4;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 98px;
+    float: right;
+}
+
+.result_btn:hover {
+    background-color: #0069d9;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#text-container {
+    margin-top: 20px;
+}
+
+#bluebox {
+    border: 2px solid #256BF4;
+}
+
+/* 회색 테두리를 가진 텍스트 상자 스타일 */
+
+#memo {
+    font-size: 20px;
+    margin-top: 20px;
+    height: auto;
+}
+
+textarea {
+    border-radius: 10px;
+    resize: none;
+    border: 2.5px solid rgba(37.00000159442425, 107.00000122189522, 244.0000006556511, 1);
+    width: 820px;
+    height: auto;
+    padding: 10px;
+    overflow: hidden;
+    margin-left: 3px;
+    outline: none;
+}
+
+textarea::placeholder {
+  color: rgb(150);
+}
+
+#btn {
+    background-color: rgba(37.00000159442425, 107.00000122189522, 244.0000006556511, 1);
+    width: 70px;
+    height: 25px;
+    border-radius: 75px;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    position: relative;
+    left: 777px;
+    top: -5px;
+    cursor: pointer;
+}
+
+#btn:hover {
+    background-color: #ffffff;
+    color: #256BF4;
+    border: 2px solid #256BF4;
+}
+
+.main p {
+    color: #256BF4;
+    display: inline-block;
+}

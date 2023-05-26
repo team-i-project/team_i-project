@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Noto Sans KR;
+}
+
+main {
+    width: 1100px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5%;
+    align-items: center;
+}
+
+.title {
+    display: block;
+}
+
+hr {
+    color: #256BF4;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board_list_wrap {
+    padding: 50px;
+    width: 1100px;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 2px solid #fefefe;
+}
+
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th,
+.board_list td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+.board_list .tit {
+    text-align: left;
+}
+
+.board_list .tit:hover {
+    text-decoration: underline;
+}
+
+.board_list_wrap .paging1 {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+.board_list_wrap .paging1 a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+.board_list_wrap .paging1 a:first-child {
+    margin-left: -800px;
+}
+
+.board_list_wrap .paging1 a.bt {
+    border: 1px solid #256BF4;
+    background: #256BF4;
+    color: #fff;
+}
+
+.board_list_wrap .paging1 a.num {
+    border: 1px solid #256BF4;
+    font-weight: 600;
+    color: #256BF4;
+}
+.input1{
+    width: 900px;
+    height: 80px;
+    float: left;
+}
+
+.input2{
+    width: 500px;
+    height: 80px;
+    float: left;
+}
+
+.root{
+    display: flex;
+}
+.root a{
+    height: 20px;
+    width: 30px;
+}
+
+}
+.panel-faq-container {
+  margin-bottom: -16px;
+}
+.panel-faq-title {
+  color: block;
+  cursor: pointer;
+}
+.panel-faq-answer {
+  height: 0;
+  overflow: hidden;
+  /* 변화가 시작되는 쪽에다가 transition 적용해준다 0 -> 300px
+  왜? 닫기 버튼을 누를 때 변화가 티남 */
+  transition: all 0.5s;
+}
+
+textarea {
+    padding-top: 5px;
+    margin-top: 10px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233);
+    resize:none;
+}
+
+.btn {
+    background-color: #256BF4;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    height: 80px;
+    width: 60px;
+    margin-left: 15px;
+    margin-top: 13px;
+    border-top-left-radius: 98px;
+    border-top-right-radius: 98px;
+    border-bottom-left-radius: 98px;
+    border-bottom-right-radius: 98px;
+}
+
+.btn:hover {
+    background-color: #0069d9;
+}
+
+.btn2 {
+    background-color: #256BF4;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    height: 80px;
+    width: 60px;
+    margin-left: 15px;
+    margin-top: 13px;
+    border-top-left-radius: 98px;
+    border-top-right-radius: 98px;
+    border-bottom-left-radius: 98px;
+    border-bottom-right-radius: 98px;
+}
+
+.btn2:hover {
+    background-color: #0069d9;
+}
+
+.active {
+  display: block;
+  /* 높이를 정해줘야지만 transition이 적용됨 */
+  height: 110px;
+}
+
+.active1 {
+    color: #256BF4;
+    text-decoration: none;
+}
+
+.nonActive {
+    color: black;
+    text-decoration: none;
+}
+
+.paging {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+
+.paging a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+
+.paging a:first-child {
+    margin-left: 0;
+}
+
+.paging a.bt {
+    border: 1px solid #ffffff;
+    background: #256BF4;
+    color: #fff;
+}
+
+.paging a.num {
+    border: 1px solid #256BF4;
+    font-weight: 600;
+    color: #08090a;
+}
+
+.paging a.num.on {
+    background: #256BF4;
+    color: #fff;
+}
+
+.nonanswered {
+    color: gray;
+}
+
+.answered {
+    color: #256BF4;
+    font-weight: bold;
+}

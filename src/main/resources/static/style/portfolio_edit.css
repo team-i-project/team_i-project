@@ -1,0 +1,301 @@
+* {
+    font-family: Noto Sans KR;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 1300px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5%;
+    align-items: flex-start;
+}
+
+.sideBar ul {
+    float: right;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menuPart {
+    float: right;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.sideBar li.active a {
+    color: #256BF4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sideBar li a {
+    color: black;
+    text-decoration: none;
+    font-weight: thin;
+}
+
+.sideBar li a:hover {
+    color: #256BF4;
+}
+
+/* 마우스 올리는*/
+
+.right_info {
+    color: rgba(29.000000171363354, 29.000000171363354, 32.00000189244747, 1);
+    position: relative;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.main {
+    float: left;
+    width: 65%;
+    padding: 50px;
+    height: auto;
+        border-left: 1px solid #B7B7B7;
+}
+
+#image_right, #image_bottom {
+    float: left;
+}
+
+.disableAccount {
+    background-color: #256bf4;
+    width: 250px;
+    height: 50px;
+    top: 465px;
+    border-radius: 8px;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+.currentText,
+.recurrentText {
+    color: rgba(111.00000098347664, 111.00000098347664, 111.00000098347664, 1);
+    width: 344px;
+    height: 17px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: -0.20000000298023224;
+}
+
+.currentPart,
+.recurrentPart {
+    background-color: rgba(246.0000005364418, 243.00000071525574, 243.00000071525574, 1);
+    width: 345px;
+    height: 63px;
+    position: relative;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.currentArea,
+.recurrentArea {
+    width: 368px;
+    height: 45px;
+    position: absolute;
+    left: 16px;
+    top: 9px;
+}
+
+.currentInput,
+.recurrentInput {
+    color: rgba(159.0000057220459, 159.0000057220459, 159.0000057220459, 1);
+    width: 368px;
+    height: 23px;
+    position: absolute;
+    left: 0px;
+    top: 22px;
+    text-align: left;
+    font-size: 16px;
+    letter-spacing: -0.20000000298023224;
+}
+
+.current,
+.recurrent {
+    border: none;
+    background: transparent;
+    color: rgba(159.0000057220459, 159.0000057220459, 159.0000057220459, 1);
+    position: absolute;
+    text-align: left;
+    font-size: 16px;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.textbox {
+    width: 500px;
+    height: 200px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid #256BF4;
+    /* 테두리를 두껍게 하고 색상을 변경 */
+    background-color: #FFFFFF;
+    /* 배경색상을 흰색으로 변경 */
+    color: #333333;
+    /* 글자색상을 검정색으로 변경 */
+    font-size: 16px;
+    /* 글자크기를 변경 */
+    resize: none;
+    /* 크기 조절 기능을 비활성화 */
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox label {
+    margin-left: 10px;
+}
+
+.passwdcheck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#text {
+    border: 2px solid #256BF4;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
+    font-weight:bold;
+    width: 200px;
+    margin: 5px;
+}
+.submit {
+    background-color: #256BF4;
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    font-size: 17px;
+    margin-bottom: 30px;
+    margin-left: 80%;
+}
+
+.submit:hover {
+    background-color: #0058DD;
+}
+h3,h5{
+color: #256BF4;
+    font-size: 20px;
+}
+
+
+#idc,#genderc,#namec,#locationc,#editc,#youtubec,#otherc,#messagec,#mainc,#subc,#salaryc,#workc,#toc
+{
+    font-size: 17px;
+    color: #256BF4;
+}
+
+.submit:hover {
+    background-color: #0058DD;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #256BF4;
+    float: left;
+    margin: 19px;
+    box-sizing: border-box;
+}
+
+
+textarea{
+    height:120px;
+    width: 600px;
+    padding-top: 5px;
+    margin-top: 10px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+      height: auto;
+      overflow: hidden;
+    background-color: rgb(233, 233, 233);
+    resize:none;
+}
+
+
+#portfoliotitle input[type = "text"]{
+    width:560px;
+    height:25px;
+    font-size: 20px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(233, 233, 233)
+}
+
+#subinfo input[type = "text"]{
+    width:250px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233)
+}
+#videos_link input{
+    width:500px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233)
+}
+
+#isPublic input[type = "text"]{
+    width:350px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233);
+}
+
+#isPublic input[type="text"]:disabled {
+    background-color: rgb(155, 155, 155);
+
+}
+
+hr {
+    margin-bottom: 10px;
+}
+
+
+.sideBar {
+    float: left;
+    width: 26.33%;
+    height: auto;
+}
